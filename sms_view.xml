@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    	<record model="ir.ui.view" id="vehicle_vehicle_tree_view">
+                <field name="name">vehicle.vehicle.tree</field>
+                <field name="model">vehicle.vehicle</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="Vehicle">
+                        <field name="name"/>
+                    </tree>
+                </field>
+            </record>
+
+            <record model="ir.ui.view" id="vehicle_vehicle_form_view">
+                <field name="name">vehicle.vehicle.form</field>
+                <field name="model">vehicle.vehicle</field>
+                <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <form string="Vehicle">
+                    	<sheet>
+                    	<group>
+                        <field name="name" select="1"/>
+                        </group>
+                        </sheet>
+                    </form>
+                </field>
+            </record>
+
+            <record model="ir.actions.act_window" id="action_vehicle_vehicle_tree_view">
+                <field name="name">Vehicle Model</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">vehicle.vehicle</field>
+		   <!-- <field name="domain">[('field_name','condition',criteria)]</field>-->
+                <field name="view_type">form</field>
+                <field name="view_mode">tree,form</field>
+                <field name="view_id" ref="vehicle_vehicle_tree_view"/>
+            </record>
+			<menuitem id="sms_vehicle_menu" name="Service" parent="" />
+			<menuitem id="sms_vehicle_menu1" name="Service" parent="sms_vehicle_menu" />
+			<menuitem id="vehicle_vehicle_menu" name="Vehicle Model" parent="sms_vehicle_menu1" action="action_vehicle_vehicle_tree_view"/>
+    <!-- ==================================================================================================================================== -->	
+    
+    
+    
+            
+            <record model="ir.ui.view" id="sms_sms_tree_view">
+                <field name="name">sms.sms.tree</field>
+                <field name="model">sms.sms</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="SMS">
+                        <field name="partner"/>
+                        <field name="model"/>
+                        <field name="frame_no"/>
+                        <field name="reg_no"/>
+                    </tree>
+                </field>
+            </record>
+
+            <record model="ir.ui.view" id="sms_sms_form_view">
+                <field name="name">sms.sms.form</field>
+                <field name="model">sms.sms</field>
+                <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <form string="SMS">
+                    	<sheet>
+                    	
+	                    		<group>
+			                        <field name="partner" on_change="on_change_sms(partner)" select="1"/>
+		                        </group>
+		                        <group></group>
+		                        <group>
+			                        <field name="service_due"/>
+			                        <field name="due_from"/>
+			                        <field name="due_to"/>
+	                        	</group>
+	                        	<group></group>
+	                          	<group colspan="2" col="2">
+	                        	<div>	                        	
+	                        	<group>
+			                        <field name="model"/>
+			                        <field name="frame_no"/>
+			                        <field name="reg_no"/>
+	                        	</group>
+	                        	
+                        		</div>
+		                        <group>
+			                        <field name="address"/>
+			                        <field name="ph_no"/>
+			                        <field name="mobile_no"/>
+	                        	</group>
+	                        	</group>                      	
+                        	
+                        	
+                        </sheet>
+                    </form>
+                </field>
+            </record>
+
+            <record model="ir.actions.act_window" id="action_sms_sms_tree_view">
+                <field name="name">SMS</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">sms.sms</field>
+		   <!-- <field name="domain">[('field_name','condition',criteria)]</field>-->
+                <field name="view_type">form</field>
+                <field name="view_mode">tree,form</field>
+                <field name="view_id" ref="sms_sms_tree_view"/>
+            </record>
+
+			<menuitem id="sms_sms_menu" name="SMS" parent="sms_vehicle_menu1" action="action_sms_sms_tree_view"/>
+<!-- =================================================================================================================== -->
+
+		 <record model="ir.ui.view" id="res_partner_form_view">
+                <field name="name">res.partner.form</field>
+                <field name="model">res.partner</field>
+                <field name="inherit_id" ref="base.view_partner_form"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//form/sheet/group" position="after">
+                    <group colspan="1" col="2">
+                    <group>
+                    	<field name="model"/>
+                        <field name="frame_no"/>
+                        <field name="reg_no"/>
+                    </group>
+                    </group>
+                    </xpath>                       	               
+                </field>
+            </record>
+            
+            
+  <!-- ============================================================================================================================= -->           
+    
+    
+            
+            <record model="ir.ui.view" id="sms_settings_tree_view">
+                <field name="name">sms.settings.tree</field>
+                <field name="model">sms.settings</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="Settings">
+                        <field name="url"/>
+                        <field name="sender_id"/>
+                        <field name="user_name"/>
+                        <field name="password"/>
+                    </tree>
+                </field>
+            </record>
+
+            <record model="ir.ui.view" id="sms_settings_form_view">
+                <field name="name">sms.settings.form</field>
+                <field name="model">sms.settings</field>
+                <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <form string="Settings">
+                    	<sheet>
+                    		<group colspan="2" col="2">
+	                        <field name="url"/>
+	                        <field name="sender_id"/>
+	                        
+	                        <field name="user_name"/>
+	                        <field name="password"/>
+	                        </group>
+                        </sheet>
+                    </form>
+                </field>
+            </record>
+
+            <record model="ir.actions.act_window" id="action_sms_settings_tree_view">
+                <field name="name">Settings</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">sms.settings</field>
+		   <!-- <field name="domain">[('field_name','condition',criteria)]</field>-->
+                <field name="view_type">form</field>
+                <field name="view_mode">tree,form</field>
+                <field name="view_id" ref="sms_settings_tree_view"/>
+            </record>
+
+			<menuitem id="sms_settings_menu" name="Settings" parent="sms_vehicle_menu1" action="action_sms_settings_tree_view"/>
+
+    <menuitem id="menu_partner_form1" parent="sms_vehicle_menu1" action="base.action_partner_form" sequence="2"/>
+    
+    
+            
+    </data>
+</openerp>
+
+            
+            
